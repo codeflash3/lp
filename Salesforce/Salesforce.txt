@@ -1,0 +1,62 @@
+public class bmi2 {
+	
+    public Double wt {get;set;}
+    public Double ht {get;set;}
+    public String rs {get;set;}
+    
+    public bmi2()
+    {
+        
+    }
+    public void Calculate()
+    {
+        ht=ht/100;
+        System.debug(ht);
+        if(wt>0)
+        {
+            if(ht>0)
+            {
+                Double r = (wt) / (ht * ht);
+                rs=String.valueOf(r);
+            }
+        }
+        else{
+            rs='Invalid Parameters';
+        }
+    }
+}
+
+
+
+
+<apex:page Controller="bmi2" >
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+               <apex:pageBlockSectionItem >
+                   <apex:outputLabel value="Enter your height(cm)"></apex:outputLabel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:inputText value="{!ht}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                   <apex:outputLabel value="Enter your weight(kg)"></apex:outputLabel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:inputText value="{!wt}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                   <apex:outputLabel value="Result"></apex:outputLabel>
+                </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem >
+                   <apex:inputText value="{!rs}" id="res"/><apex:actionStatus id="sts" startText="Finding"></apex:actionStatus>
+                </apex:pageBlockSectionItem>
+                
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+                    <apex:commandButton value="Find" action="{!calculate}" status="sts" reRender="res"/>
+                </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+    
+</apex:page>
